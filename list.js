@@ -34,8 +34,10 @@ function renderFilter() {
   for (const t of state.tags) if (!counts.some(([c]) => c === t)) counts.push([t, 0]);
   for (const [t, n] of counts) {
     if (t === UNTAGGED && !n && !state.tags.includes(UNTAGGED)) continue;
-    const chip = el("span", { className: "chip" + (state.tags.includes(t) ? " on" : "") },
+    const on = state.tags.includes(t);
+    const chip = el("button", { type: "button", className: "chip" + (on ? " on" : "") },
       t === UNTAGGED ? "untagged" : t, el("span", { className: "n", textContent: n }));
+    chip.setAttribute("aria-pressed", String(on));
     chip.onclick = () => {
       state.tags = state.tags.includes(t) ? state.tags.filter((x) => x !== t) : [...state.tags, t];
       persist();
@@ -52,16 +54,16 @@ function renderEntry(e) {
 
   const link = /^https?:/i.test(e.url)
     ? el("a", { href: e.url, target: "_blank", rel: "noopener", textContent: e.title || e.url })
-    : el("span", { textContent: e.title || e.url });
+    : el("span", { className: "title", textContent: e.title || e.url });
   const meta = el("div", { className: "meta muted", textContent: `${host}${e.url.startsWith("http:") ? " (http)" : ""} · added ${added}` });
 
   const tagChips = el("div", { className: "chips" });
   for (const t of tags) {
-    const c = el("span", { className: "chip", textContent: t, title: "Filter by this tag" });
+    const c = el("button", { type: "button", className: "chip", textContent: t, title: "Filter by this tag" });
     c.onclick = () => { if (!state.tags.includes(t)) state.tags = [...state.tags, t]; persist(); render(); };
     tagChips.append(c);
   }
-  const edit = el("input", { type: "text", className: "tag-edit", value: tags.join(", "), placeholder: "add tags…" });
+  const edit = el("input", { type: "text", className: "tag-edit", value: tags.join(", "), placeholder: "add tags…", ariaLabel: "Tags" });
   edit.onchange = () => setTags(e.url, parseTags(edit.value));
 
   const readBtn = el("button", { type: "button", textContent: e.hasBeenRead ? "Mark unread" : "Mark read" });
@@ -80,12 +82,19 @@ function renderEntry(e) {
     link, el("div", { className: "actions" }, readBtn, rm), meta, tagChips, edit);
 }
 
+function renderEmpty() {
+  const [head, body] = !state.entries.length
+    ? ["Your reading list is empty", "Click the toolbar icon on any page to add and tag it."]
+    : ["Nothing matches", "Try another search, or switch tag filters off."];
+  return el("li", { className: "empty" }, el("strong", { textContent: head }), body);
+}
+
 function render() {
   $("q").value = state.query;
   $("status").value = state.status;
   renderFilter();
   const shown = filterEntries(state.entries, state.map, state);
-  $("entries").replaceChildren(...shown.map(renderEntry));
+  $("entries").replaceChildren(...(shown.length ? shown.map(renderEntry) : [renderEmpty()]));
   const unread = state.entries.filter((e) => !e.hasBeenRead).length;
   $("summary").textContent = `${shown.length} shown · ${state.entries.length} total · ${unread} unread`;
 }

@@ -18,20 +18,23 @@ $("tags").value = current.join(", ");
 $("status").textContent = !canSave
   ? "Only http(s) pages can go in the reading list."
   : existing ? "In reading list" : "Not in reading list yet — Save adds it";
+$("status").dataset.state = !canSave ? "off" : existing ? "in" : "out";
 $("save").disabled = !canSave;
 $("save").textContent = existing ? "Save tags" : "Add + tag";
 
 // Suggest existing tags (most used first); click toggles it in the input.
 const all = tagCounts(await chrome.readingList.query({}), map).slice(0, 20);
 for (const [t] of all) {
-  const chip = document.createElement("span");
+  const chip = document.createElement("button");
+  chip.type = "button";
   chip.className = "chip" + (current.includes(t) ? " on" : "");
+  chip.setAttribute("aria-pressed", String(current.includes(t)));
   chip.textContent = t;
   chip.onclick = () => {
     const tags = new Set(parseTags($("tags").value));
     tags.has(t) ? tags.delete(t) : tags.add(t);
     $("tags").value = [...tags].sort().join(", ");
-    chip.classList.toggle("on");
+    chip.setAttribute("aria-pressed", String(chip.classList.toggle("on")));
   };
   $("suggest").append(chip);
 }
@@ -45,6 +48,7 @@ $("form").onsubmit = async (ev) => {
     window.close();
   } catch (e) {
     $("status").textContent = `Error: ${e.message}`;
+    $("status").dataset.state = "error";
   }
 };
 

@@ -4,24 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Reading List Tags</title>
+  <link rel="icon" href="icons/icon-32.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="page">
-    <header>
+    <header class="top">
+      <div class="top-title">
+        <h1>Reading list</h1>
+        <div class="muted" id="summary" role="status"></div>
+      </div>
       <div class="controls">
-        <input type="search" id="q" placeholder="Search title, URL, tags…" autofocus>
-        <select id="status">
+        <input type="search" id="q" placeholder="Search title, URL, tags…" aria-label="Search" autofocus>
+        <select id="status" aria-label="Show">
           <option value="unread">Unread</option>
           <option value="all">All</option>
           <option value="read">Read</option>
         </select>
-        <button type="button" id="export">Export</button>
-        <button type="button" id="import">Import</button>
+        <div class="io">
+          <button type="button" id="export" title="Download tags as JSON">Export</button>
+          <button type="button" id="import" title="Merge tags from a JSON file">Import</button>
+        </div>
         <input type="file" id="import-file" accept="application/json" hidden>
       </div>
-      <div class="chips" id="tag-filter"></div>
-      <div class="muted" id="summary"></div>
+      <div class="chips" id="tag-filter" aria-label="Filter by tag"></div>
     </header>
     <ul class="entries" id="entries"></ul>
   </div>

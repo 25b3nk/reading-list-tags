@@ -51,6 +51,7 @@ background.js      service worker: drops tags when an entry is removed
 popup.html/.js     tag the current page
 list.html/.js      full list: search, filter, edit, export/import
 style.css          shared styles (light/dark)
+icons/             toolbar/extension icons (PNG rendered from icon.svg)
 lib/tags.js        pure helpers (parse, filter, merge, prune); unit-tested
 lib/store.js       chrome.storage.local wrapper
 test/              node --test unit tests

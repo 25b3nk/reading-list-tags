@@ -6,17 +6,23 @@
 </head>
 <body>
   <div class="popup">
-    <div>
-      <div class="title" id="title">…</div>
-      <div class="muted" id="status"></div>
+    <div class="pop-head">
+      <div class="pop-page">
+        <div class="title" id="title">…</div>
+        <div class="status" id="status"></div>
+      </div>
+      <button type="button" class="ghost" id="open-list" title="Open the full reading list">Open list ↗</button>
     </div>
-    <form class="row" id="form">
-      <input type="text" id="tags" placeholder="tags, comma or space separated" autocomplete="off" autofocus>
-      <button class="primary" type="submit" id="save">Save</button>
+    <form id="form">
+      <label class="label" for="tags">Tags</label>
+      <div class="row">
+        <input type="text" id="tags" placeholder="comma or space separated" autocomplete="off" autofocus>
+        <button class="primary" type="submit" id="save">Save</button>
+      </div>
     </form>
-    <div class="chips" id="suggest"></div>
-    <div class="row">
-      <button type="button" id="open-list">Open list</button>
+    <div class="suggest">
+      <div class="label">Your tags</div>
+      <div class="chips" id="suggest"></div>
     </div>
   </div>
   <script type="module" src="popup.js"></script>
