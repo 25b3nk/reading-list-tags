@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reading List Tags</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="controls">
+        <input type="search" id="q" placeholder="Search title, URL, tags…" autofocus>
+        <select id="status">
+          <option value="unread">Unread</option>
+          <option value="all">All</option>
+          <option value="read">Read</option>
+        </select>
+        <button type="button" id="export">Export</button>
+        <button type="button" id="import">Import</button>
+        <input type="file" id="import-file" accept="application/json" hidden>
+      </div>
+      <div class="chips" id="tag-filter"></div>
+      <div class="muted" id="summary"></div>
+    </header>
+    <ul class="entries" id="entries"></ul>
+  </div>
+  <script type="module" src="list.js"></script>
+</body>
+</html>

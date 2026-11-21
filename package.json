@@ -1,0 +1,1 @@
+{"type":"module","private":true,"name":"reading-list-tags","version":"0.1.0","license":"MIT","scripts":{"test":"node --test test/*.mjs"}}

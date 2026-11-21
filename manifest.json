@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Reading List Tags",
+  "version": "0.1.0",
+  "description": "Add tags to Chrome's built-in reading list, then filter and search by them.",
+  "minimum_chrome_version": "120",
+  "permissions": ["readingList", "storage", "activeTab"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_popup": "popup.html", "default_title": "Tag this page" },
+  "commands": {
+    "_execute_action": { "suggested_key": { "default": "Alt+Shift+R" } }
+  }
+}
