@@ -4,7 +4,7 @@ A Chrome extension (Manifest V3) that adds **tags** to Chrome's built-in Reading
 
 ## Features
 
-- **Popup** (toolbar icon or `Alt+Shift+R`): tag the current page. If it isn't in the reading list yet, it's added. Your most-used tags appear as clickable suggestions.
+- **Popup** (toolbar icon or `Alt+Shift+R`): tag the current page. If it isn't in the reading list yet, it's added. Pages already in the list get a *Mark read* / *Mark unread* button. Your most-used tags appear as clickable suggestions.
 - **List page** (popup → *Open list*):
   - search over title, URL and tags
   - filter by one or more tags (AND), plus an **untagged** view (an inbox for items saved from your phone)
@@ -70,7 +70,8 @@ After editing, reload the extension on `chrome://extensions` (↻). Manual check
 - [ ] popup on a new page → *Add + tag* → it appears in the list with its tags
 - [ ] a tag filter shows only matching items; *untagged* shows items with no tags
 - [ ] *Mark read* moves an item out of the Unread view
-- [ ] *Remove* (twice) deletes the entry, and its tags are gone after a re-import check or Export
+- [ ] popup *Mark read* on a page already in the list → it leaves the Unread view; reopening the popup offers *Mark unread*
+- [ ] *Remove* (twice) deletes the entry, and an Export afterwards no longer contains its URL
 - [ ] Export → Import round-trips
 
 ## Seeding tags

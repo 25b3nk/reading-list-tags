@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 — 2026-11-21
+
+- Popup: *Mark read* / *Mark unread* button for pages already in the reading list (one click, then the popup closes); status shows "· read" for read pages.
+
 ## 0.1.1 — 2026-11-21
 
 UI polish; no change to storage, permissions or tag logic.

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Reading List Tags",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Add tags to Chrome's built-in reading list, then filter and search by them.",
   "minimum_chrome_version": "120",
   "permissions": [

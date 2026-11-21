@@ -17,8 +17,26 @@ const current = map[url] ?? [];
 $("tags").value = current.join(", ");
 $("status").textContent = !canSave
   ? "Only http(s) pages can go in the reading list."
-  : existing ? "In reading list" : "Not in reading list yet — Save adds it";
+  : existing ? (existing.hasBeenRead ? "In reading list · read" : "In reading list") : "Not in reading list yet — Save adds it";
 $("status").dataset.state = !canSave ? "off" : existing ? "in" : "out";
+
+// Mark read/unread for pages already in the list; one click, then close.
+if (existing) {
+  const btn = $("toggle-read");
+  $("read-row").hidden = false;
+  if (existing.hasBeenRead) $("read-hint").textContent = "Read already";
+  btn.textContent = existing.hasBeenRead ? "Mark unread" : "Mark read";
+  btn.title = existing.hasBeenRead ? "Move back to Unread" : "Mark this page as read";
+  btn.onclick = async () => {
+    try {
+      await chrome.readingList.updateEntry({ url, hasBeenRead: !existing.hasBeenRead });
+      window.close();
+    } catch (e) {
+      $("status").textContent = `Error: ${e.message}`;
+      $("status").dataset.state = "error";
+    }
+  };
+}
 $("save").disabled = !canSave;
 $("save").textContent = existing ? "Save tags" : "Add + tag";
 
