@@ -7,7 +7,7 @@
   --fg: #1f2328;          /* body text */
   --muted: #59616b;       /* secondary text, counts, placeholders */
   --line: #d9dde3;        /* dividers, card borders */
-  --line-strong: #8c949e; /* input borders (>= 3:1 vs surface) */
+  --line-strong: #838b95; /* input borders (>= 3:1 vs surface) */
   --hover: #eceff3;       /* hover fill */
 
   --chip: #e9edf2; --chip-fg: #2c333b; --chip-hover: #dde3ea;
@@ -77,7 +77,6 @@ button {
   background: var(--surface); color: var(--fg);
   border: 1px solid var(--line-strong); border-radius: var(--radius);
   padding: 6px 12px; min-height: 34px; cursor: pointer; white-space: nowrap;
-  transition: background-color .12s, border-color .12s, color .12s;
 }
 button:hover { background: var(--hover); }
 button:disabled { cursor: not-allowed; }
@@ -166,9 +165,9 @@ li.entry .actions { grid-column: 2; grid-row: 1 / span 3; display: flex; gap: 6p
 li.entry .actions button { font-size: 13px; min-height: 30px; padding: 4px 10px; }
 li.entry input.tag-edit {
   grid-column: 1 / -1; width: 100%; margin-top: 6px; font-size: 12px; min-height: 30px; padding: 4px 8px;
-  border: 1px dashed var(--line); background: transparent; color: var(--muted);
+  border: 1px dashed var(--line-strong); background: transparent; color: var(--muted);
 }
-li.entry input.tag-edit:hover { border-color: var(--line-strong); color: var(--fg); }
+li.entry input.tag-edit:hover { border-color: var(--muted); color: var(--fg); }
 li.entry input.tag-edit:focus { border-style: solid; background: var(--surface); color: var(--fg); }
 
 li.entry.read { background: var(--read-bg); box-shadow: none; }
